@@ -1,24 +1,6 @@
 
 
-/*var	canvas=document.getElementById("myCanvas");
-var	ctx=canvas.getContext("2d");
-	//canvas_width:
-	//canvas_height:
-const canvas_width="580";
-const canvas_height="320";
 
-
-
-
-
-function startGame()
-{
-    ctx.beginPath();
-	ctx.rect(20, canvas_height/2, 20, 20);
-	ctx.fillStyle = "green";
-	ctx.fill();
-
-}*/
 
 
 
@@ -31,7 +13,6 @@ var count=0;
 
 function startGame() {
     myGamePiece = new component( 5,"true","green",10,270/2,"circle");
-    //myGamePiece.gravity = 0.05;
     myScore = new component("30px", "Consolas", "white", 280, 40, "text");
     gameOver=new component("30px","Consolas","white",10,160,"text");
     myGameArea.start();
@@ -56,13 +37,10 @@ function component(width, height, color, x, y, type) {
     this.type = type;
     this.score = 0;
     this.width = width;
-    this.height = height;
-    //this.speedX = 0;
-    //this.speedY = 0;    
+    this.height = height;   
     this.x = x;
     this.y = y;
-    this.gravity = 0;
-    this.gravitySpeed = 0;
+    
     this.update = function() {
         ctx = myGameArea.context;
         if (this.type == "text") {
@@ -84,28 +62,12 @@ function component(width, height, color, x, y, type) {
             ctx.fillRect(this.x, this.y, this.width, this.height);
         }
     }
-    /*this.newPos = function() {
-        //this.gravitySpeed += this.gravity;
-        this.x =event.clientX;
-        //this.y += this.speedY + this.gravitySpeed;
-        this.y=event.clientY;
-        this.hitBottom();
-    }*/
-   /* this.move=function(event){
-    	
-    	ctx=myGameArea.context;
-    	ctx.clearRect(this.x,this.y,this.width,this.height);
-    	this.x =event.clientX;
-    	this.y=event.clientY;
-    	ctx.fillRect(this.x,this.y,this.width,this.height);
-    	ctx.fillStyle=color;
-
-    }*/
+    
     this.hitBottom = function() {
         var rockbottom = myGameArea.canvas.height - this.height;
         if (this.y > rockbottom) {
             this.y = rockbottom;
-           // this.gravitySpeed = 0;
+           
         }
     }
     this.crashWith = function(otherobj) {
@@ -132,7 +94,7 @@ function updateGameArea() {
         	myGameArea.clear();
         	gameOver.text="GAME OVER\n"+myScore.text;
         	gameOver.update();
-        	
+        	console.log("hi");
         	if(count===0)
         	{
         	var p=document.getElementsByTagName("p")[0];
@@ -143,7 +105,8 @@ function updateGameArea() {
 			p.appendChild(btn);
 			btn.setAttribute("onclick","reset()"); 
 			btn.setAttribute("style","background-color:red;border:1;text-align: center;display: inline-block;font-size: 16px;color:white;width:100px;height:50px");
-		    count++;}
+		    count++;
+		    break;}
             
             return;
         } 
@@ -167,7 +130,7 @@ function updateGameArea() {
     }
     myScore.text="SCORE: " + myGameArea.frameNo;
     myScore.update();
-    //myGamePiece.newPos();
+    
     myGamePiece.update();
 }
 
@@ -180,7 +143,7 @@ function everyinterval(n) {
 myGameArea.canvas.addEventListener("mousedown",move,false);
 function move(event)
 {
-	ctx=myGameArea.context;
+	    ctx=myGameArea.context;
 	    ctx.beginPath();
     	ctx.clearRect(myGamePiece.x-myGamePiece.width,myGamePiece.y-myGamePiece.width,myGamePiece.width*2,myGamePiece.width*2);
     	ctx.closePath();
@@ -190,24 +153,27 @@ function move(event)
     	myGamePiece.update();
     	myGamePiece.hitBottom();
 
-    	//ctx.fillRect(myGamePiece.x,myGamePiece.y,myGamePiece.width,myGamePiece.height);
+    	
     	
 
 }
 
  function reset()  
  {
- 	startGame();
- 	myGameArea.frameNo=1;
  	
- 	var element=document.getElementsByTagName("button")[0];
- 	element.parentNode.removeChild(element);
+ 	myGameArea.frameNo=0;
+ 	myScore.text="SCORE:"+myGameArea.frameNo;
+ 	myObstacles=[];
+
+ 	var button=document.getElementsByTagName("button")[0];
+ 	button.parentNode.removeChild(button);
+    var canvas=document.getElementsByTagName("canvas")[0];
+ 	canvas.parentNode.removeChild(canvas);
 
  	count=0;
- 	countReset=0;
+ 	startGame();
+ 	console.log("hello");
+ 	
  }  
  
 
-/*function accelerate(n) {
-    myGamePiece.gravity = n;
-}*/
