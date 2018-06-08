@@ -16,27 +16,18 @@ var imgflag=0;
 
 
  function main(){
-    
-    myGameArea.clear();
-    myGameArea.canvas.addEventListener("mousemove",move,false);
-
-    
-    console.log("mouse working");
-
-    
-    var x, height, gap, minHeight, maxHeight, minGap, maxGap,flag=0;
-    for (i = 0; i < myObstacles.length; i += 1) {
+     myGameArea.clear();
+     myGameArea.canvas.addEventListener("mousemove",move,false);
+     var x, height, gap, minHeight, maxHeight, minGap, maxGap,flag=0;
+     for (i = 0; i < myObstacles.length; i += 1) {
         if (myGamePiece.crashWith(myObstacles[i])) {
             
             flag=1;
             myGameArea.canvas.removeEventListener("mousemove", move);
-             
-            
-            
             gameOver.text="GAME OVER\n"+myScore.text;
             myGameArea.frameNo=0;
             gameOver.update();
-            console.log("hi");
+            
             if(flagSound==1)
             {myBackground.stop();
                  mySound.play();
@@ -51,7 +42,7 @@ var imgflag=0;
             btn.appendChild(t);                                // Append the text to <button>
             p.appendChild(btn);
             btn.setAttribute("onclick","reset()"); 
-            console.log("reset");
+            
             btn.setAttribute("style","background-color:red;border:1;text-align: center;display: inline-block;font-size: 16px;color:white;width:100px;height:50px");
             count++;
            
@@ -119,73 +110,73 @@ function startGame() {
         init();
         myGameArea.start();
         flagSound=1;var count = 4;
-function anim() {
+       function anim() {
 
-    if (count >= 0) {
-        myGameArea.clear();
-        if(count>0)
-        {countDown.text=count;
-            myBells.play();}
+           if (count >= 0) {
+               myGameArea.clear();
+               if(count>0)
+               {countDown.text=count;
+                   myBells.play();}
 
-    else
-        {countDown.text="GO!";
-         finalBell.play();
-     }
-    
-        countDown.update();
-
-        count--;
-        setTimeout(anim, 2000);
-
-    }
-    else {myBackground.play();
-    
-
-
-    
-    main();}
-        
-    }
-
-anim();
-}
-else{ 
-    init();
-    flagSound=0;
-    myGameArea.start();
-    var count=4;
-    function anim() {
-    if (count >= 0) {
-        myGameArea.clear();
-        if(count>0)
-        {countDown.text=count;
+           else
+               {countDown.text="GO!";
+                finalBell.play();
             }
 
-    else
-        {countDown.text="GO!";
-         
-     }
-    
-        countDown.update();
+               countDown.update();
 
-        count--;
-        setTimeout(anim, 2000);
+               count--;
+               setTimeout(anim, 2000);
 
-    }
-    
-    
-
- else
-    
-    main();
-        
-    }
-
-anim();
-}
+           }
+           else {myBackground.play();
 
 
-}
+
+
+           main();}
+
+           }
+
+       anim();
+       }
+       else{ 
+           init();
+           flagSound=0;
+           myGameArea.start();
+           var count=4;
+           function anim() {
+           if (count >= 0) {
+               myGameArea.clear();
+               if(count>0)
+               {countDown.text=count;
+                   }
+
+           else
+               {countDown.text="GO!";
+
+            }
+
+               countDown.update();
+
+               count--;
+               setTimeout(anim, 2000);
+
+           }
+
+
+
+        else
+
+           main();
+
+           }
+
+   anim();
+   }
+
+
+   }
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
@@ -237,7 +228,7 @@ function component(width, height, color, x, y, type) {
          cycle++;
          console.log(this.x,this.y);
          ctx.drawImage(image,this.x,this.y,25,40);
-         console.log("image ");
+         
        }
 
        else {
@@ -284,16 +275,8 @@ function move(event)
         ctx.closePath();
         myGamePiece.x =event.clientX;
         myGamePiece.y=event.clientY;
-        
-    
         myGamePiece.update();
-            
         myGamePiece.hitBottom();
-       console.log("image loaded");
-
-        
-        
-
 }
 
  function reset()  
@@ -311,7 +294,7 @@ function move(event)
 
     count=0;
     startGame();
-    console.log("hello");
+    
 
     
  }  
